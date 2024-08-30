@@ -19,10 +19,10 @@ export default function SitesRoute() {
                 <FileIcon className="size-10 text-primary" />
             </div>
             <h2 className="mt-6 text-xl font-semibold">
-                You don't have any sites created
+                You do not have any sites created
             </h2>
             <p className='mb-8 mt-2 text-center text-sm leading-tight text-muted-foreground max-w-sm mx-auto'>
-                You currently don't have any sites. Please create some so that you can see them right here!
+                You currently do not have any sites. Please create some so that you can see them right here!
             </p>
 
             <Button asChild>
