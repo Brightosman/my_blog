@@ -60,4 +60,62 @@ export async function CreatePostAction(prevState: any, formData: FormData) {
   return redirect(`/dashboard/sites/${formData.get("siteId")}`);
 }
 
+export async function EditPostActions(prevState: any, formData: FormData) {
+  const user = await requireUser();
+
+  const submission = parseWithZod(formData, {
+    schema: PostSchema,
+  });
+
+  if (submission.status !== "success") {
+    return submission.reply();
+  }
+
+  const data = await prisma.post.update({
+    where: {
+      userId: user.id,
+      id: formData.get("articleId") as string,
+    },
+    data: {
+      title: submission.value.title,
+      smallDescription: submission.value.smallDescription,
+      slug: submission.value.slug,
+      articleContent: JSON.parse(submission.value.articleContent),
+      image: submission.value.coverImage,
+    },
+  });
+
+  return redirect(`/dashboard/sites/${formData.get("siteId")}`);
+}
+
+export async function DeletePost(formData: FormData) {
+  const user = await requireUser();
+
+  const data = await prisma.post.delete({
+    where: {
+      userId: user.id,
+      id: formData.get("articleId") as string,
+    },
+  });
+
+  return redirect(`/dashboard/sites/${formData.get("siteId")}`);
+}
+
+export async function UpdateImage(formData: FormData) {
+  const user = await requireUser();
+
+  const data = await prisma.site.update({
+    where: {
+      userId: user.id,
+      id: formData.get("siteId") as string,
+    },
+    data: {
+      imageUrl: formData.get("imageUrl") as string,
+    },
+  });
+
+  return redirect(`/dashboard/sites/${formData.get("siteId")}`);
+}
+
+
 
