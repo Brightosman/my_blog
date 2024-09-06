@@ -27,6 +27,7 @@ model User {
   Product Product[]
 
   //for Brile_Blog
+  customerId   String? @unique
   Site  Site[]
   posts Post[]
   Subscription Subscription?

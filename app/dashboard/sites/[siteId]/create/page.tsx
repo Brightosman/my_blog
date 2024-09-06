@@ -174,7 +174,14 @@ export default function ArticleCreationRoute({
                 defaultValue={fields.articleContent.initialValue}
                 value={JSON.stringify(value)}
               />
-              <TailwindEditor onChange={setValue} initialValue={value} />
+              {/* <TailwindEditor onChange={setValue} initialValue={value} /> */}
+              <TailwindEditor
+                onChange={(content) => {
+                  console.log(content); // Debug the value to check H1 tag
+                  setValue(content);
+                }}
+                initialValue={value}
+              />
               <p className="text-red-500 text-sm">
                 {fields.articleContent.errors}
               </p>
